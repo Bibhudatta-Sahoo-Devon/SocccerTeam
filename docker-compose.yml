@@ -27,3 +27,16 @@ services:
         volumes:
             - ./storage/docker-db:/var/lib/mysql
 
+    database-test:
+          image: mysql
+          container_name: soccer-mysql-server-test
+          command: --default-authentication-plugin=mysql_native_password
+          restart: unless-stopped
+          ports:
+              - "4307:3306"
+          environment:
+              MYSQL_ROOT_PASSWORD: password1
+              MYSQL_DATABASE: lsoccer-test
+          volumes:
+              - ./storage/docker-db:/var/lib/mysql-test
+
