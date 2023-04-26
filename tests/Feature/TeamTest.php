@@ -13,7 +13,7 @@ class TeamTest extends TestCase
 
    public function test_get_all_team(){
 
-       $teams = Teams::factory()->count(10)->create();
+       Teams::factory()->count(10)->create();
 
        $response = $this->getJson('/api/teams');
        $response->assertStatus(200);
@@ -21,7 +21,7 @@ class TeamTest extends TestCase
 
    public function test_wrong_uri_to_get_all_team(){
 
-       $teams = Teams::factory()->count(10)->create();
+       Teams::factory()->count(10)->create();
 
        $response = $this->getJson('/api/teams/list');
        $response->assertStatus(404);

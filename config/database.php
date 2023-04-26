@@ -65,13 +65,13 @@ return [
 
         'test_db' => [
             'driver' => 'mysql',
-            'url' => env('TEST_DATABASE_URL'),
-            'host' => env('TEST_DB_HOST', '127.0.0.1'),
+            'url' => env('DATABASE_URL'),
+            'host' => env('TEST_DB_HOST', 'database-test'),
             'port' => env('TEST_DB_PORT', '3306'),
-            'database' => env('TEST_DB_DATABASE', 'forge'),
-            'username' => env('TEST_DB_USERNAME', 'forge'),
+            'database' => env('TEST_DB_DATABASE', 'lsoccer-test'),
+            'username' => env('TEST_DB_USERNAME', 'root'),
             'password' => env('TEST_DB_PASSWORD', ''),
-            'unix_socket' => env('TEST_DB_SOCKET', ''),
+            'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',

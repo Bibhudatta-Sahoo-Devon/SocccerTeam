@@ -28,7 +28,7 @@ class PlayerTest extends TestCase
     public function test_wrong_uri_to_get_all_player_of_team(){
 
         $team = Teams::factory()->create();
-        $player = Players::factory()->count(10)->create([
+        Players::factory()->count(10)->create([
             'team_id'=>$team->id
         ]);
 
