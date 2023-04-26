@@ -19,14 +19,16 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'Soccer Admin',
             'email' => 'admin@soccer.com',
-            'password' => Hash::make('admin@123')
+            'password' => Hash::make('admin@123'),
+            'role' => 'A',
         ]);
 
         // Normal User
         User::create([
             'name' => 'User Soccer',
             'email' => 'user@soccer.com',
-            'password' => Hash::make('user@123')
+            'password' => Hash::make('user@123'),
+            'role' => 'U',
         ]);
     }
 }
