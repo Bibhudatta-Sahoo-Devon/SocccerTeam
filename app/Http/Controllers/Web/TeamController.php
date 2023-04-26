@@ -15,11 +15,11 @@ use Illuminate\Support\Facades\Auth;
 
 class TeamController extends Controller
 {
-    protected $teams;
+    protected $teamsAPIController;
 
-    public function __construct(TeamsController $teams)
+    public function __construct(TeamsController $teamsAPIController)
     {
-        $this->teams = $teams;
+        $this->teamsAPIController = $teamsAPIController;
     }
 
     /**
@@ -27,7 +27,7 @@ class TeamController extends Controller
      */
     public function dashboard()
     {
-        $teams = $this->teams->getAllTeams();
+        $teams = $this->teamsAPIController->getAllTeams();
         $data = [];
         if ($teams->getStatusCode() == 200) {
             $data = json_decode($teams->getContent(), true);
@@ -51,7 +51,7 @@ class TeamController extends Controller
      */
     public function storeCreateTeam(StoreTeamRequest $request)
     {
-        $response = $this->teams->createTeam($request);
+        $response = $this->teamsAPIController->createTeam($request);
         if ($response->getStatusCode() == 201)
             return redirect('dashboard')->with(['message' => 'Team created successfully']);
 
@@ -65,7 +65,7 @@ class TeamController extends Controller
      */
     public function editTeam(int $id)
     {
-        $team = $this->teams->getTeam($id);
+        $team = $this->teamsAPIController->getTeam($id);
         $data = [];
         if ($team->getStatusCode() == 200) {
             $data = json_decode($team->getContent(), true);
@@ -81,7 +81,7 @@ class TeamController extends Controller
      */
     public function updateTeam(UpdateTeamRequest $request, $id)
     {
-        $response = $this->teams->updateTeam($request, $id);
+        $response = $this->teamsAPIController->updateTeam($request, $id);
         if ($response->getStatusCode() == 202)
             return redirect('dashboard')->with(['message' => 'Team updated successfully']);
 
@@ -95,7 +95,7 @@ class TeamController extends Controller
      */
     public function deleteTeam($id)
     {
-        $response = $this->teams->deleteTeam($id);
+        $response = $this->teamsAPIController->deleteTeam($id);
         if ($response->getStatusCode() == 204)
             return redirect('dashboard')->with(['message' => 'Team successfully deleted!']);
 

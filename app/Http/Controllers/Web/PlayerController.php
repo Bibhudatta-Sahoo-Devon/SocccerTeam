@@ -16,22 +16,22 @@ use Illuminate\Support\Facades\Auth;
 
 class PlayerController extends Controller
 {
-    protected $players;
-    protected $teams;
+    protected $playersAPIController;
+    protected $teamsAPIController;
 
-    public function __construct(PlayersController $players,TeamsController $teams)
+    public function __construct(PlayersController $playersAPIController,TeamsController $teamsAPIController)
     {
-        $this->players = $players;
-        $this->teams = $teams;
+        $this->playersAPIController = $playersAPIController;
+        $this->teamsAPIController = $teamsAPIController;
     }
 
     /**
      * @param int $teamId
      * @return Application|Factory|View
      */
-    public function getTeamPlayers(int $teamId)//todo
+    public function getTeamPlayers(int $teamId)
     {
-        $response = $this->teams->getTeam($teamId);
+        $response = $this->teamsAPIController->getTeam($teamId);
         $team = [];
         if ($response->getStatusCode() == 200)
             $team = json_decode($response->getContent(),true);
@@ -45,7 +45,7 @@ class PlayerController extends Controller
      */
     public function createPlayer(int $teamId)
     {
-        $response = $this->teams->getTeam($teamId);
+        $response = $this->teamsAPIController->getTeam($teamId);
         $team = [];
         if ($response->getStatusCode() == 200)
             $team = json_decode($response->getContent(),true);
@@ -58,7 +58,7 @@ class PlayerController extends Controller
      */
     public function storeCreatePlayer(StorePlayerRequest $request)
     {
-        $response = $this->players->createPlayer($request);
+        $response = $this->playersAPIController->createPlayer($request);
 
         if ($response->getStatusCode() == 201)
             return redirect(route('createPlayer', $request->get('team')))->with(['message' => 'Player created successfully']);
@@ -72,7 +72,7 @@ class PlayerController extends Controller
      */
     public function editPlayer(int $id)
     {
-        $response = $this->players->getPlayer($id);
+        $response = $this->playersAPIController->getPlayer($id);
         if ($response->getStatusCode() == 200)
             return view('player', ['data' => (array)$response->getData()]);
 
@@ -86,7 +86,7 @@ class PlayerController extends Controller
      */
     public function updatePlayer(UpdatePlayerRequest $request, $id)
     {
-        $response = $this->players->updatePlayer($request, $id);
+        $response = $this->playersAPIController->updatePlayer($request, $id);
 
         if ($response->getStatusCode() == 202)
             return redirect(route('teamPlayers', $request->get('team')))->with(['message' => 'Player updated successfully']);
@@ -100,10 +100,10 @@ class PlayerController extends Controller
      */
     public function deletePlayer(int $id)
     {
-        $response = $this->players->getPlayer($id);
+        $response = $this->playersAPIController->getPlayer($id);
         if ($response->getStatusCode() == 200){
             $teamID = $response->getData()->team_id;
-            $response = $this->players->deletePlayer($id);
+            $response = $this->playersAPIController->deletePlayer($id);
             if ($response->getStatusCode() == 204)
                 return redirect(route('teamPlayers', $teamID))->with(['message' => 'Player deleted successfully']);
         }

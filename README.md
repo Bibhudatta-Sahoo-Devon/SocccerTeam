@@ -20,17 +20,22 @@ First rename `.env.example` to `.env`
 Start the docker with command -`docker-compose up -d`     
 Now we have to set up laravel application, so run the below commands   
 1.`docker-compose exec php-apache /bin/bash `   
-2.`cd ..`     
+2.`cd /var/www/html`     
 3.`composer update --no-scripts`  
 4.`php artisan storage:link`  
-5.`php artisan migrate`   
+5.`php artisan migrate`  
+6.`php artisan db:seed`  
+7.Now access the application by go to `http://localhost:8088`   
+8.Please use the below User Details
 
-For Migrate database
-Now access the application by go to http://localhost:8088 url.
+    Admin Details : admin@soccer.com Password : admin@123
+    User Details : user@soccer.com Password : user@123
+
 
 ## API documentation
 
-API documentation added with swagger. To see the documentation please goto this http://localhost:8088/api/documentation  link.
+API documentation added with swagger.  
+ To see the documentation please goto this `http://localhost:8088/api/documentation`  link.
 
 
 
