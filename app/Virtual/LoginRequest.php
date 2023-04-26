@@ -19,7 +19,7 @@ class LoginRequest
      * @OA\Property(
      *      title="email",
      *      description="Email id of the user",
-     *      example="user@gmail.com"
+     *      example="admin@soccer.com"
      * )
      *
      * @var string
@@ -30,7 +30,7 @@ class LoginRequest
      * @OA\Property(
      *      title="Password",
      *      description="User's Password",
-     *      example="sadsa5@seew2"
+     *      example="admin@123"
      * )
      *
      * @var string
