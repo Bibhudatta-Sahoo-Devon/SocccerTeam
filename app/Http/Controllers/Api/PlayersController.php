@@ -7,7 +7,7 @@ use App\Exceptions\ApiExceptionHandler;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePlayerRequest;
 use App\Http\Requests\UpdatePlayerRequest;
-use App\Repositories\PlayerRepository;
+use App\Interfaces\PlayerRepositoryInterface;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -15,7 +15,7 @@ class PlayersController extends Controller
 {
     protected $playeRepository;
 
-    public function __construct(PlayerRepository $repository)
+    public function __construct(PlayerRepositoryInterface $repository)
     {
         $this->playeRepository = $repository;
     }
