@@ -55,7 +55,7 @@
                                     <td><a href="{{route('teamPlayers',$team['id'])}}">View Players</a></td>
                                     @if(isset($admin) && $admin)
                                         <td><a href="{{route('editTeam',$team['id'])}}">Edit</a></td>
-                                        <td><a href="{{route('deleteTeam',$team['id'])}}">Delete</a></td>
+                                        <td><a class="deleteButton" href="{{route('deleteTeam',$team['id'])}}">Delete</a></td>
                                     @endif
                                 </tr>
                             @endforeach
@@ -75,6 +75,12 @@
         <script type="text/javascript">
             $(document).ready(function () {
                 $('#teams_table').DataTable({});
+
+                $(".deleteButton").click(function(){
+                    if (!confirm("Do you want to delete this team?")){
+                        return false;
+                    }
+                });
             });
         </script>
     @stop

@@ -58,7 +58,7 @@
                                              height="70"></td>
                                     @if(isset($admin) && $admin)
                                         <td><a href="{{route('editPlayer',$player['id'])}}">Edit</a></td>
-                                        <td><a href="{{route('deletePlayer',$player['id'])}}">Delete</a></td>
+                                        <td><a class="deleteButton" href="{{route('deletePlayer',$player['id'])}}">Delete</a></td>
                                     @endif
                                 </tr>
                             @endforeach
@@ -78,6 +78,12 @@
         <script type="text/javascript">
             $(document).ready(function () {
                 $('#players_table').DataTable({});
+
+                $(".deleteButton").click(function(){
+                    if (!confirm("Do you want to delete this player?")){
+                        return false;
+                    }
+                });
             });
         </script>
     @stop

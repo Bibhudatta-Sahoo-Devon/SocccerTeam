@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\V1;
 
 use App\Exceptions\ApiExceptionHandler;
 use App\Http\Controllers\Controller;
@@ -72,6 +72,15 @@ class TeamsController extends Controller
      *      tags={"Team"},
      *      summary="Get team details",
      *      description="Returns details of the team",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="Team id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
      *      @OA\Response (
      *          response=200,
      *          description="Successful operation",

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>soccer | index</title>
+    <title>soccer | Welcome</title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -533,7 +533,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $.ajax({
-            'url': "api/teams",
+            'url': "api/v1/teams",
             'method': "GET",
             'contentType': 'application/json',
             success: function (data) {
@@ -561,29 +561,28 @@
                                 }
                             }
                         ]
-                    })
-
+                    });
+                    $('#tableDiv').show();
                 } else {
-                    showNodataFound();
+                    showErrorMessageForTeam('Currently there are no teams Present!');
                 }
-                $('#tableDiv').show();
-
-
             },
             error: function (xhr, ajaxOptions, thrownError) {
                 if (xhr.status == 404) {
-                    showNodataFound();
+                    showErrorMessageForTeam('Something went wrong, Not able to get teams details!');
+                } else {
+                    showErrorMessageForTeam('Something went wrong, please try after sometime!');
                 }
             }
         });
 
-        function showNodataFound() {
-            $('#tableDiv').html('<h2>No teams Present</h2>').show();
+        function showErrorMessageForTeam(message) {
+            $('#tableDiv').html('<h2>' + message + '</h2>').show();
         }
 
         window.players = function (teamid) {
             $.ajax({
-                'url': "/api/team/" + teamid + "/players",
+                'url': "/api/v1/team/" + teamid + "/players",
                 'method': "GET",
                 'contentType': 'application/json',
                 success: function (data) {

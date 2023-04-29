@@ -7,10 +7,10 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <x-button class="ml-4" >
-                <a href="{{route('teamPlayers',isset($data['team_id'])?$data['team_id']:$data['id'])}}">Back </a>
+            <x-button class="ml-4">
+                <a href="{{route('dashboard')}}"> Back To Dashboard</a>
                 <pre>  |  </pre>
-                <a href="{{route('dashboard')}}"> Dashboard</a>
+                <a href="{{route('teamPlayers',isset($data['team_id'])?$data['team_id']:$data['id'])}}">Player List</a>
             </x-button>
 
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -23,37 +23,44 @@
                 </div>
                 <div class="p-6 bg-white border-b border-gray-200">
 
-                    <form method="POST" id="team" action="{{(isset($data['team_id']))?url("player/{$data['id']}"):url('create/players')}}" enctype="multipart/form-data">
+                    <form method="POST" id="team"
+                          action="{{(isset($data['team_id']))?url("player/{$data['id']}"):url('player/create')}}"
+                          enctype="multipart/form-data">
                     @csrf
 
                     <!-- First Name -->
                         <div>
-                            <x-label for="first_name" :value="__('First Name')" />
+                            <x-label for="first_name" :value="__('First Name')"/>
                             @if(isset($data['team_id']))
-                                <x-input id="first_name" class="block mt-1 w-full" type="text" name="first_name" value="{{old('first_name', $data['first_name'])}}"  required autofocus />
+                                <x-input id="first_name" class="block mt-1 w-full" type="text" name="first_name"
+                                         value="{{old('first_name', $data['first_name'])}}" required autofocus/>
                             @else
-                                <x-input id="first_name" class="block mt-1 w-full" type="text" name="first_name" :value="old('first_name')"  required autofocus />
+                                <x-input id="first_name" class="block mt-1 w-full" type="text" name="first_name"
+                                         :value="old('first_name')" required autofocus/>
                             @endif
                         </div>
 
-                    <!-- Last Name -->
+                        <!-- Last Name -->
                         <div>
-                            <x-label for="last_name" :value="__('Last Name')" />
+                            <x-label for="last_name" :value="__('Last Name')"/>
                             @if(isset($data['team_id']))
-                                <x-input id="last_name" class="block mt-1 w-full" type="text" name="last_name" value="{{old('last_name', $data['last_name'])}}"  required autofocus />
+                                <x-input id="last_name" class="block mt-1 w-full" type="text" name="last_name"
+                                         value="{{old('last_name', $data['last_name'])}}" required autofocus/>
                             @else
-                                <x-input id="last_name" class="block mt-1 w-full" type="text" name="last_name" :value="old('last_name')"  required autofocus />
+                                <x-input id="last_name" class="block mt-1 w-full" type="text" name="last_name"
+                                         :value="old('last_name')" required autofocus/>
                             @endif
                         </div>
 
                         <!-- File -->
                         <div class="mt-4">
-                            <x-label for="image" :value="__('Image')" />
+                            <x-label for="image" :value="__('Image')"/>
 
-                            <x-input id="image" class="block mt-1 w-full" type="file" name="image" />
+                            <x-input id="image" class="block mt-1 w-full" type="file" name="image"/>
                         </div>
 
-                        <input name="team" type="hidden" value="{{isset($data['team_id'])?$data['team_id']:$data['id']}}">
+                        <input name="team" type="hidden"
+                               value="{{isset($data['team_id'])?$data['team_id']:$data['id']}}">
 
                         <div class="flex items-center justify-end mt-4">
                             <x-button class="ml-4">
@@ -74,25 +81,4 @@
             </div>
         </div>
     </div>
-
-    @section('script')
-{{--                <script type="text/javascript">--}}
-{{--                    $(document).ready(function () {--}}
-{{--                        $('#team').on('submit', function(e) {--}}
-{{--                            e.preventDefault();--}}
-{{--                            var name = $('#name').val();--}}
-{{--                            var logo = $('#logo').val();--}}
-{{--                            $.ajax({--}}
-{{--                                type: "POST",--}}
-{{--                                url: '/team',--}}
-{{--                                data: {name:name, logo:logo},--}}
-{{--                                success: function( msg ) {--}}
-{{--                                    alert( msg );--}}
-{{--                                }--}}
-{{--                            });--}}
-{{--                        });--}}
-{{--                    });--}}
-{{--                </script>--}}
-    @stop
-
 </x-app-layout>

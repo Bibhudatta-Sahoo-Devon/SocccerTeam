@@ -3,19 +3,19 @@
 namespace Tests\Feature;
 
 use App\Models\User;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class LoginTest extends TestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
 
     public function test_user_login_with_api()
     {
         $user = User::factory()->create();
 
-        $response = $this->post('/api/login', [
+        $response = $this->post(route('api.login'), [
             'email' => $user->email,
             'password' => 'password',
         ]);
@@ -27,7 +27,7 @@ class LoginTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $this->post('/login', [
+        $this->post(route('api.login'), [
             'email' => $user->email,
             'password' => 'wrong-password',
         ]);

@@ -76,7 +76,7 @@ class User
      * @OA\Property(
      *     title="Created at",
      *     description="Created at",
-     *     example="2022-02-15 15:55:45",
+     *     example="2023-04-24 15:55:45",
      *     format="datetime",
      *     type="string"
      * )
@@ -89,7 +89,7 @@ class User
      * @OA\Property(
      *     title="Updated at",
      *     description="Updated at",
-     *     example="2022-02-15 15:55:45",
+     *     example="2023-04-24 15:55:45",
      *     format="datetime",
      *     type="string"
      * )

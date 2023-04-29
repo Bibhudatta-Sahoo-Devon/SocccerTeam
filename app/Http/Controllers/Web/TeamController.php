@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Api\TeamsController;
+use App\Http\Controllers\Api\V1\TeamsController;
 use App\Http\Requests\StoreTeamRequest;
 use App\Http\Requests\UpdateTeamRequest;
 use Illuminate\Contracts\Foundation\Application;
@@ -70,7 +70,7 @@ class TeamController extends Controller
         if ($team->getStatusCode() == 200) {
             $data = json_decode($team->getContent(), true);
         }
-        return view('team', ['data'=>$data]);
+        return view('team', ['data' => $data]);
     }
 
 

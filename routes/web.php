@@ -29,18 +29,22 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [TeamController::class, 'dashboard'])->name('dashboard');
 
     Route::middleware(['role:admin'])->group(function () {
-        Route::get('/create/team', [TeamController::class, 'createTeam'])->name('createTeam');
-        Route::post('/create/team', [TeamController::class, 'storeCreateTeam']);
-        Route::get('team/{teams}', [TeamController::class, 'editTeam'])->name('editTeam');
-        Route::post('team/{teams}', [TeamController::class, 'updateTeam']);
-        Route::get('delete/team/{teams}', [TeamController::class, 'deleteTeam'])->name('deleteTeam');
 
+        Route::prefix('team')->group(function() {
+            Route::get('/', [TeamController::class, 'createTeam'])->name('createTeam');
+            Route::post('/create', [TeamController::class, 'storeCreateTeam']);
+            Route::get('/{teams}', [TeamController::class, 'editTeam'])->name('editTeam');
+            Route::post('/{teams}', [TeamController::class, 'updateTeam'])->name('storeTeam');
+            Route::get('/delete/{teams}', [TeamController::class, 'deleteTeam'])->name('deleteTeam');
+        });
 
-        Route::get('create/players/{teams}', [PlayerController::class, 'createPlayer'])->name('createPlayer');
-        Route::post('create/players', [PlayerController::class, 'storeCreatePlayer']);
-        Route::get('player/{players}', [PlayerController::class, 'editPlayer'])->name('editPlayer');
-        Route::post('player/{players}', [PlayerController::class, 'updatePlayer']);
-        Route::get('delete/player/{players}', [PlayerController::class, 'deletePlayer'])->name('deletePlayer');
+        Route::prefix('player')->group(function() {
+            Route::get('/create/{teams}', [PlayerController::class, 'createPlayer'])->name('createPlayer');
+            Route::post('/create', [PlayerController::class, 'storeCreatePlayer'])->name('storePlayer');
+            Route::get('/{players}', [PlayerController::class, 'editPlayer'])->name('editPlayer');
+            Route::post('/{players}', [PlayerController::class, 'updatePlayer']);
+            Route::get('/delete/{players}', [PlayerController::class, 'deletePlayer'])->name('deletePlayer');
+        });
     });
 
 

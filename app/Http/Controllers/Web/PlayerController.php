@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Web;
 
-use App\Http\Controllers\Api\TeamsController;
+use App\Http\Controllers\Api\V1\TeamsController;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Api\PlayersController;
+use App\Http\Controllers\Api\V1\PlayersController;
 use App\Http\Requests\StorePlayerRequest;
 use App\Http\Requests\UpdatePlayerRequest;
 use Illuminate\Contracts\Foundation\Application;
@@ -19,7 +19,7 @@ class PlayerController extends Controller
     protected $playersAPIController;
     protected $teamsAPIController;
 
-    public function __construct(PlayersController $playersAPIController,TeamsController $teamsAPIController)
+    public function __construct(PlayersController $playersAPIController, TeamsController $teamsAPIController)
     {
         $this->playersAPIController = $playersAPIController;
         $this->teamsAPIController = $teamsAPIController;
@@ -34,8 +34,8 @@ class PlayerController extends Controller
         $response = $this->teamsAPIController->getTeam($teamId);
         $team = [];
         if ($response->getStatusCode() == 200)
-            $team = json_decode($response->getContent(),true);
-        return view('player-list', ['data'=>$team, 'admin' => Auth::user()->role == 'A']);
+            $team = json_decode($response->getContent(), true);
+        return view('player-list', ['data' => $team, 'admin' => Auth::user()->role == 'A']);
 
     }
 
@@ -48,7 +48,7 @@ class PlayerController extends Controller
         $response = $this->teamsAPIController->getTeam($teamId);
         $team = [];
         if ($response->getStatusCode() == 200)
-            $team = json_decode($response->getContent(),true);
+            $team = json_decode($response->getContent(), true);
         return view('player', ['data' => $team]);
     }
 
@@ -101,7 +101,7 @@ class PlayerController extends Controller
     public function deletePlayer(int $id)
     {
         $response = $this->playersAPIController->getPlayer($id);
-        if ($response->getStatusCode() == 200){
+        if ($response->getStatusCode() == 200) {
             $teamID = $response->getData()->team_id;
             $response = $this->playersAPIController->deletePlayer($id);
             if ($response->getStatusCode() == 204)

@@ -13,7 +13,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
 
-                    <form method="POST" id="team" action="{{(isset($data))?url("team/{$data['id']}"):url('/create/team')}}" enctype="multipart/form-data">
+                    <form method="POST" id="team" action="{{(isset($data))?url("team/{$data['id']}"):url('team/create')}}" enctype="multipart/form-data">
                     @csrf
 
                     <!-- Name -->
@@ -52,25 +52,4 @@
             </div>
         </div>
     </div>
-
-    @section('script')
-{{--        <script type="text/javascript">--}}
-{{--            $(document).ready(function () {--}}
-{{--                $('#team').on('submit', function(e) {--}}
-{{--                    e.preventDefault();--}}
-{{--                    var name = $('#name').val();--}}
-{{--                    var logo = $('#logo').val();--}}
-{{--                    $.ajax({--}}
-{{--                        type: "POST",--}}
-{{--                        url: '/team',--}}
-{{--                        data: {name:name, logo:logo},--}}
-{{--                        success: function( msg ) {--}}
-{{--                            alert( msg );--}}
-{{--                        }--}}
-{{--                    });--}}
-{{--                });--}}
-{{--            });--}}
-{{--        </script>--}}
-    @stop
-
 </x-app-layout>
