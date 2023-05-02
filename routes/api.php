@@ -18,6 +18,7 @@ use \App\Http\Controllers\Api\V1\PlayersController;
 */
 
 Route::group(['prefix' => 'v1', 'as' => 'api.'], function () {
+    /* These API endpoints will be available for guest users */
     Route::post('/login', [LoginController::class, 'login'])->name('login');
     Route::get('/teams', [TeamsController::class, 'getAllTeams'])->name('show.all.teams');
     Route::get('/team/{teams}/players', [PlayersController::class, 'getTeamPlayers'])->name('show.team.players');
@@ -31,6 +32,8 @@ Route::group(['prefix' => 'v1', 'as' => 'api.'], function () {
         Route::middleware(['role'])->group(function () {
             Route::group(['prefix' => 'team', 'as' => 'team.'], function () {
                 Route::post('/', [TeamsController::class, 'createTeam'])->name('create');
+                /* The "prefix" will make the API URI as /api/v1/team/{id}
+                The "as" will make the route name as  api.team.show */
                 Route::get('/{id}', [TeamsController::class, 'getTeam'])->name('show');
                 Route::put('/{id}', [TeamsController::class, 'updateTeam'])->name('edit');
                 Route::delete('/{id}', [TeamsController::class, 'deleteTeam'])->name('delete');

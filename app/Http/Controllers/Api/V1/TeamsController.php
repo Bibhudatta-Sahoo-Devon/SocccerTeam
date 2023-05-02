@@ -15,6 +15,9 @@ class TeamsController extends Controller
 
     private $teamRepository;
 
+    /*
+     * Using Team repository
+     */
     public function __construct(TeamRepositoryInterface $repository)
     {
         $this->teamRepository = $repository;
@@ -126,7 +129,7 @@ class TeamsController extends Controller
      *      operationId="storeTeam",
      *      tags={"Team"},
      *      summary="Store new Team",
-     *      description="To cerate a new team",
+     *      description="To create a new team",
      *      @OA\RequestBody(
      *          required=true,
      *          @OA\JsonContent(ref="#/components/schemas/StoreTeamRequest")
@@ -160,9 +163,9 @@ class TeamsController extends Controller
     {
         try {
             $request->validated();
-            $response = $this->teamRepository->storeTeam($request);
+            $createResponse = $this->teamRepository->storeTeam($request);
 
-            return new JsonResponse($response, Response::HTTP_CREATED);
+            return new JsonResponse($createResponse, Response::HTTP_CREATED);
 
         } catch (\Exception $exception) {
             throw new ApiExceptionHandler($exception->getMessage(), $exception->getCode());
@@ -225,9 +228,9 @@ class TeamsController extends Controller
     {
         try {
             $request->validated();
-            $response = $this->teamRepository->updateTeam($request, $id);
+            $updateResponse = $this->teamRepository->updateTeam($request, $id);
 
-            return new JsonResponse($response, Response::HTTP_ACCEPTED);
+            return new JsonResponse($updateResponse, Response::HTTP_ACCEPTED);
 
         } catch (\Exception $exception) {
             throw new ApiExceptionHandler($exception->getMessage(), $exception->getCode());

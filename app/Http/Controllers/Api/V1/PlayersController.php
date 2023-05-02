@@ -15,6 +15,9 @@ class PlayersController extends Controller
 {
     protected $playeRepository;
 
+    /*
+     * Using Player repository
+     */
     public function __construct(PlayerRepositoryInterface $repository)
     {
         $this->playeRepository = $repository;
@@ -132,7 +135,7 @@ class PlayersController extends Controller
      *      operationId="storePlayer",
      *      tags={"Player"},
      *      summary="Store new player",
-     *      description="To cerate a new player",
+     *      description="To create a new player",
      *      @OA\RequestBody(
      *          required=true,
      *          @OA\JsonContent(ref="#/components/schemas/StorePlayerRequest")
@@ -166,8 +169,8 @@ class PlayersController extends Controller
     {
         try {
             $request->validated();
-            $response = $this->playeRepository->storePlayer($request);
-            return new JsonResponse($response, Response::HTTP_CREATED);
+            $createResponse = $this->playeRepository->storePlayer($request);
+            return new JsonResponse($createResponse, Response::HTTP_CREATED);
         } catch (\Exception $exception) {
             throw new ApiExceptionHandler($exception->getMessage(), $exception->getCode());
         }
@@ -226,8 +229,8 @@ class PlayersController extends Controller
     {
         try {
             $request->validated();
-            $response = $this->playeRepository->updatePlayer($request, $id);
-            return new JsonResponse($response, Response::HTTP_ACCEPTED);
+            $updateResponse = $this->playeRepository->updatePlayer($request, $id);
+            return new JsonResponse($updateResponse, Response::HTTP_ACCEPTED);
         } catch (\Exception $exception) {
             throw new ApiExceptionHandler($exception->getMessage(), $exception->getCode());
         }
