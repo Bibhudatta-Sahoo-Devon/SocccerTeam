@@ -15,7 +15,9 @@ class ApiExceptionHandler extends Exception
      */
     public function render(): JsonResponse
     {
-        if ($this->code < 100) {
+        if ($this->code == 0){
+            $this->code = 404;
+        } elseif ($this->code < 100) {
             $this->code = 500;
         }
 
@@ -30,7 +32,7 @@ class ApiExceptionHandler extends Exception
                 $errorResponse  = 'Forbidden';
                 break;
             case 404:
-                $errorResponse  = 'Not Found';
+                $errorResponse  = 'File Not Found';
                 break;
             case 405:
                 $errorResponse  = 'Method Not Allowed';
@@ -39,6 +41,7 @@ class ApiExceptionHandler extends Exception
                 $errorResponse  = ($this->code == 500) ? 'Something went wrong, Please try after some time.' : $this->getMessage();
                 break;
         }
+
 
         return new JsonResponse($errorResponse, $this->code);
     }

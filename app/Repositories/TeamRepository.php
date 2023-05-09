@@ -8,6 +8,7 @@ use App\Http\Requests\StoreTeamRequest;
 use App\Http\Requests\UpdateTeamRequest;
 use App\Interfaces\TeamRepositoryInterface;
 use App\Models\Teams;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class TeamRepository implements TeamRepositoryInterface
 {
@@ -19,9 +20,9 @@ class TeamRepository implements TeamRepositoryInterface
     public function getTeam(int $id): Teams
     {
         try {
-            return Teams::where('id', $id)->with('player')->first();
+            return Teams::where('id', $id)->with('player')->firstOrFail();
 
-        } catch (\Exception $exception) {
+        } catch (ModelNotFoundException $exception) {
             throw $exception;
         }
     }

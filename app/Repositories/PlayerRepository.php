@@ -8,6 +8,7 @@ use App\Http\Requests\StorePlayerRequest;
 use App\Http\Requests\UpdatePlayerRequest;
 use App\Interfaces\PlayerRepositoryInterface;
 use App\Models\Players;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class PlayerRepository implements PlayerRepositoryInterface
 {
@@ -20,8 +21,8 @@ class PlayerRepository implements PlayerRepositoryInterface
     public function getPlayer(int $id): Players
     {
         try {
-            return Players::where('id', $id)->first();
-        } catch (\Exception $exception) {
+            return Players::where('id', $id)->firstOrFail();
+        } catch (ModelNotFoundException $exception) {
             throw $exception;
         }
     }
