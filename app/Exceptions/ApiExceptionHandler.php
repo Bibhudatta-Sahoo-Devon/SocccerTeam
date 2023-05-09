@@ -21,25 +21,25 @@ class ApiExceptionHandler extends Exception
 
         switch ($this->code) {
             case 400:
-                $response = 'Bad Request';
+                $errorResponse = 'Bad Request';
                 break;
             case 401:
-                $response  = 'Unauthenticated';
+                $errorResponse  = 'Unauthenticated';
                 break;
             case 403:
-                $response  = 'Forbidden';
+                $errorResponse  = 'Forbidden';
                 break;
             case 404:
-                $response  = 'Not Found';
+                $errorResponse  = 'Not Found';
                 break;
             case 405:
-                $response  = 'Method Not Allowed';
+                $errorResponse  = 'Method Not Allowed';
                 break;
             default:
-                $response  = ($this->code == 500) ? 'Something went wrong, Please try after some time.' : $this->getMessage();
+                $errorResponse  = ($this->code == 500) ? 'Something went wrong, Please try after some time.' : $this->getMessage();
                 break;
         }
 
-        return new JsonResponse($response, $this->code);
+        return new JsonResponse($errorResponse, $this->code);
     }
 }

@@ -13,6 +13,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
+use Laravel\Sanctum\PersonalAccessToken;
 use Symfony\Component\HttpFoundation\Response;
 
 class LoginController extends Controller
@@ -61,17 +62,19 @@ class LoginController extends Controller
         $user = Auth::user();
 
         if ($user->role == 'A')
-            $jwtToken = $user->createToken('jwtToken', ['admin'])->plainTextToken;
+            $token = $user->createToken('adminToken', ['admin'])->plainTextToken;
         else
-            $jwtToken = $user->createToken('jwtToken', ['user'])->plainTextToken;
+            $token = $user->createToken('userToken', ['user'])->plainTextToken;
 
-        return new JsonResponse(['token' => $jwtToken], Response::HTTP_OK);
+        return new JsonResponse(['token' => $token], Response::HTTP_OK);
     }
 
 
-    public function logout(): JsonResponse
+    public function logout(Request $request): JsonResponse
     {
-        Cookie::forget('jwt');
+        $userAuthToken = $request->bearerToken();
+        $token = PersonalAccessToken::findToken($userAuthToken);
+        $token->delete();
         return new JsonResponse(['message' => 'Logout Successfully'], Response::HTTP_OK);
     }
 
