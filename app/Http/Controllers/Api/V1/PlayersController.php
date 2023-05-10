@@ -253,7 +253,7 @@ class PlayersController extends Controller
      *          )
      *      ),
      *      @OA\Response(
-     *          response=204,
+     *          response=200,
      *          description="Player deleted successfully"
      *       ),
      *      @OA\Response(

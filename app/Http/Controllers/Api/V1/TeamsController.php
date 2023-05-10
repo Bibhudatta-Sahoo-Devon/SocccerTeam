@@ -254,7 +254,7 @@ class TeamsController extends Controller
      *          )
      *      ),
      *      @OA\Response(
-     *          response=204,
+     *          response=200,
      *          description="Team deleted successfully",
      *       ),
      *      @OA\Response(

@@ -137,7 +137,7 @@ class PlayerTest extends TestCase
         $player = Players::factory()->create();
 
         $response = $this->actingAs($user)->deleteJson(route('api.player.delete', ['id' => $player->id]));
-        $response->assertStatus(204);
+        $response->assertStatus(200);
     }
 
     public function test_delete_a_player_without_login()

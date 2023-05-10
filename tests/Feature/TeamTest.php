@@ -106,7 +106,7 @@ class TeamTest extends TestCase
         $team = Teams::factory()->create();
 
         $response = $this->actingAs($user)->deleteJson(route('api.team.delete', ['id' => $team->id]));
-        $response->assertStatus(204);
+        $response->assertStatus(200);
     }
 
     public function test_delete_a_team_without_login()
