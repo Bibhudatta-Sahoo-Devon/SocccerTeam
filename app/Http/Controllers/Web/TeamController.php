@@ -105,7 +105,7 @@ class TeamController extends Controller
     public function deleteTeam($id)
     {
         $deleteResponse = $this->teamsAPIController->deleteTeam($id);
-        if ($deleteResponse->getStatusCode() == 204)
+        if ($deleteResponse->getStatusCode() == 200)
             return redirect('dashboard')->with(['message' => 'Team successfully deleted!']);
 
         return redirect()->back()->withErrors($deleteResponse);

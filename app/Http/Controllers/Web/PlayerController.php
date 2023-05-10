@@ -113,7 +113,7 @@ class PlayerController extends Controller
         if ($playerResponse->getStatusCode() == 200) {
             $teamID = $playerResponse->getData()->team_id;
             $deleteResponse = $this->playersAPIController->deletePlayer($id);
-            if ($deleteResponse->getStatusCode() == 204)
+            if ($deleteResponse->getStatusCode() == 200)
                 return redirect(route('teamPlayers', $teamID))->with(['message' => 'Player deleted successfully']);
         }
         return redirect()->back()->withErrors('Player is not present.');

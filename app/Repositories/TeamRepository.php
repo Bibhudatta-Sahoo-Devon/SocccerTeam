@@ -103,8 +103,8 @@ class TeamRepository implements TeamRepositoryInterface
             $teams->id = $team;
 
             $teams->player()->delete();
-
             $teams->delete();
+
         } catch (\Exception $exception) {
             throw $exception;
         }
