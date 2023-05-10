@@ -279,7 +279,7 @@ class PlayersController extends Controller
     {
         try {
             $this->playeRepository->deletePlayer($id);
-            return new JsonResponse(['massage' => 'Player deleted successfully'], Response::HTTP_NO_CONTENT);
+            return new JsonResponse(['massage' => 'Player deleted successfully'], Response::HTTP_OK);
         } catch (\Exception $exception) {
             throw new ApiExceptionHandler($exception->getMessage(), $exception->getCode());
         }

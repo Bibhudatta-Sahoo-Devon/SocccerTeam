@@ -69,13 +69,4 @@ class LoginController extends Controller
         return new JsonResponse(['token' => $token], Response::HTTP_OK);
     }
 
-
-    public function logout(Request $request): JsonResponse
-    {
-        $userAuthToken = $request->bearerToken();
-        $token = PersonalAccessToken::findToken($userAuthToken);
-        $token->delete();
-        return new JsonResponse(['message' => 'Logout Successfully'], Response::HTTP_OK);
-    }
-
 }

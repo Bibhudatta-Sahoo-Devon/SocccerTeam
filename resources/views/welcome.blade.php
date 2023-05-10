@@ -571,7 +571,7 @@
                 if (xhr.status == 404) {
                     showErrorMessageForTeam('Something went wrong, Not able to get teams details!');
                 } else {
-                    showErrorMessageForTeam('Something went wrong, please try after sometime!');
+                    showErrorMessageForTeam('Something went wrong, please try again after sometime!');
                 }
             }
         });

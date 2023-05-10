@@ -24,7 +24,6 @@ Route::group(['prefix' => 'v1', 'as' => 'api.'], function () {
     Route::get('/team/{teams}/players', [PlayersController::class, 'getTeamPlayers'])->name('show.team.players');
 
     Route::middleware(['auth:sanctum'])->group(function () {
-        Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
         Route::get('/user', function (Request $request) {
             return $request->user();
         })->name('user');

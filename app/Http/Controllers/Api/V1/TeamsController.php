@@ -281,7 +281,7 @@ class TeamsController extends Controller
         try {
             $this->teamRepository->deleteTeam($id);
 
-            return new JsonResponse(['massage' => 'Deleted Team successfully'], Response::HTTP_NO_CONTENT);
+            return new JsonResponse(['massage' => 'Deleted Team successfully'], Response::HTTP_OK);
 
         } catch (\Exception $exception) {
             throw new ApiExceptionHandler($exception->getMessage(), $exception->getCode());
